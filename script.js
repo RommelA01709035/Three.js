@@ -1,4 +1,3 @@
-// Escena, cámara y renderizador
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -7,10 +6,10 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 // Configuración de la luz
-const ambientLight = new THREE.AmbientLight(0x404040); // Luz ambiental suave
+const ambientLight = new THREE.AmbientLight(0x404040); 
 scene.add(ambientLight);
 
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1); // Luz direccional para sombras
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
 directionalLight.position.set(5, 10, 7.5).normalize();
 scene.add(directionalLight);
 
@@ -20,19 +19,16 @@ loader.load('./models/F-20_v5.stl', function (geometry) {
     const material = new THREE.MeshPhongMaterial({ color: 0x555555, specular: 0x111111, shininess: 200 });
     const mesh = new THREE.Mesh(geometry, material);
 
-    // Posiciona el modelo en la escena
     mesh.position.set(0, 0, 0);
     mesh.rotation.set(0, 0, 0);
     mesh.scale.set(1, 1, 1);
 
-    // Añade el modelo a la escena
     scene.add(mesh);
 });
 
-// Posiciona la cámara
+
 camera.position.z = 5;
 
-// Animación
 function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
